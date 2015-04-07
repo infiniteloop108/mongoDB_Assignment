@@ -1,0 +1,4 @@
+Exercise Set 1
+
+1. db.scores.find( { score: {$lt: 65} } )
+2. 
