@@ -4,9 +4,8 @@ Exercise Set 1
 2. db.scores.find( { $query: { kind: "quiz" }, $orderby: {score: -1} }, { _id:0, score:1 } ).limit(1)
    db.scores.find( { $query: { kind: "quiz" }, $orderby: {score: 1} }, { _id:0, score:1 } ).limit(1)
    ALTER:
-   db.scores.aggregate( {$match: {"kind":"quiz"}}, {$group: {_id:"kind", minScore: {$min: "$score"}} } )
-   db.scores.aggregate( {$match: {"kind":"quiz"}}, {$group: {_id:"kind", minScore: {$max: "$score"}} } )
-3. db.stories.find( { "shorturl.view_count": { $gt: 1000 } } 
+   db.scores.aggregate( {$match: {"kind":"quiz"}}, {$group: {_id:null, minScore: {$min: "$score"}, maxScore: {$max: "$score"} } } )
+3. db.stories.find( { "shorturl.view_count": { $gt: 1000 } } ) 
 4. db.stories.find( { $or: [ {"topic.name": "Television"}, { "media": "videos"} ] } ).skip(5).limit(10)
 5. db.stories.find( { $and: [ {"topic.name": "Comedy"}, { $or:  [{"media": "news"}, {"media":"images"}] } ] } )
    ALTER:

@@ -1,0 +1,5 @@
+MongoDB shell version: 3.0.1
+connecting to: test
+switched to db training
+{ "_id" : null, "minScore" : 50, "maxScore" : 99 }
+bye
