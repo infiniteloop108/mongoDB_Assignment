@@ -1,12 +1,21 @@
 Exercise Set 1
 
-1. 
-2.
-3.
-4.
-5.
+1. db.scores.find( {score: {$lt : 65}} )
+2. db.scores.find( { $query: { kind: "quiz" }, $orderby: {score: -1} }, { _id:0, score:1 } ).limit(1)
+   db.scores.find( { $query: { kind: "quiz" }, $orderby: {score: 1} }, { _id:0, score:1 } ).limit(1)
+   ALTER:
+   db.scores.aggregate( {$match: {"kind":"quiz"}}, {$group: {_id:"kind", minScore: {$min: "$score"}} } )
+   db.scores.aggregate( {$match: {"kind":"quiz"}}, {$group: {_id:"kind", minScore: {$max: "$score"}} } )
+3. db.stories.find( { "shorturl.view_count": { $gt: 1000 } } 
+4. db.stories.find( { $or: [ {"topic.name": "Television"}, { "media": "videos"} ] } ).skip(5).limit(10)
+5. db.stories.find( { $and: [ {"topic.name": "Comedy"}, { $or:  [{"media": "news"}, {"media":"images"}] } ] } )
+   ALTER:
+   db.stories.find( { $or: [ {$and: [{"topic.name": "Comedy"}, {"media":"news"}]}, { $and: [{"topic.name" : "Comedy"},{"media": "images"}]} ]  } )
+   ALTER:
+   db.stories.find( { $and: [ {"topic.name": "Comedy"}, {"media": {$in : ["news", "images"]}} ] } )
 
 Exercise Set 2
 
-1.
-2.
+1. db.scores.update({score: {$gte: 90}}, {$set: {grade: "A"}}, {multi: true})
+   db.scores.update({ $and: [{score: {$lt: 90}}, {score: {$gte: 80}}] }, {$set: {grade: "B"}}, {multi: true})
+2. db.scores.update({score: {$lt:60}}, {$inc: {score: 10}}, {multi:true}) 
